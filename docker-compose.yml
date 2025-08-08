@@ -4,9 +4,7 @@ services:
   tms-app:
     build: .
     ports:
-      - "8081:80"
-    volumes:
-      - .:/var/www/html
+      - "8080:80"
     depends_on:
       - mysql
     networks:
@@ -20,13 +18,8 @@ services:
       MYSQL_DATABASE: tmsdb
       MYSQL_USER: tmsuser
       MYSQL_PASSWORD: tmspass
-    volumes:
-      - mysql_data:/var/lib/mysql
     networks:
       - tms-net
-
-volumes:
-  mysql_data:
 
 networks:
   tms-net:
