@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  tms-app:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - tms-net
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tmsdb
+      MYSQL_USER: tmsuser
+      MYSQL_PASSWORD: tmspass
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - tms-net
+
+volumes:
+  mysql_data:
+
+networks:
+  tms-net:
